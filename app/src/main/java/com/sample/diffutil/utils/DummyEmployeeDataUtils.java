@@ -45,6 +45,31 @@ public class DummyEmployeeDataUtils {
         employees.add(new Employee(7, "Employee 7", "Scrum Master"));
         employees.add(new Employee(8, "Employee 8", "Sr. Tester"));
         employees.add(new Employee(9, "Employee 9", "Sr. Developer"));
+        employees.add(new Employee(10, "Employee 10", "Developer"));
+        employees.add(new Employee(12, "Employee 12", "Tester"));
+        employees.add(new Employee(13, "Employee 13", "Support"));
+        employees.add(new Employee(14, "Employee 14", "Sales Manager"));
+        employees.add(new Employee(15, "Employee 15", "Manager"));
+        employees.add(new Employee(16, "Employee 16", "Team lead"));
+        employees.add(new Employee(17, "Employee 17", "Scrum Master"));
+        employees.add(new Employee(18, "Employee 18", "Sr. Tester"));
+        employees.add(new Employee(19, "Employee 19", "Sr. Developer"));
+        return employees;
+    }
+
+    public static List<Employee> getAddEmployeeList(){
+        final List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(21, "Nam", "Developer"));
+        employees.add(new Employee(22, "Ngoc", "Tester"));
+        employees.add(new Employee(23, "Loi", "Support"));
+        return employees;
+    }
+
+    public static List<Employee> getRemoveEmployeeList(){
+        final List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(7, "Employee 7", "Scrum Master"));
+        employees.add(new Employee(8, "Employee 8", "Sr. Tester"));
+        employees.add(new Employee(9, "Employee 9", "Sr. Developer"));
         return employees;
     }
 

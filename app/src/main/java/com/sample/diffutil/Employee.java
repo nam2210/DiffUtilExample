@@ -1,5 +1,7 @@
 package com.sample.diffutil;
 
+import java.util.Objects;
+
 public class Employee {
 
     public int id;
@@ -25,23 +27,16 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Employee employee = (Employee) obj;
-
-        if (id != employee.id) return false;
-        if (!role.equalsIgnoreCase(employee.role)) return false;
-        return name != null ? name.equals(employee.name) : employee.name == null;
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = result + (name != null ? name.hashCode() : 0);
-        result = result + role.hashCode();
-        return result;
+
+        return Objects.hash(id);
     }
 }

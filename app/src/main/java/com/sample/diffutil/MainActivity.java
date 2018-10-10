@@ -43,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 mRecyclerViewAdapter.updateEmployeeListItems(
                         DummyEmployeeDataUtils.getEmployeeListSortedByRole());
                 return true;
+            case R.id.add_new_list:
+                mRecyclerViewAdapter.addNewItems(DummyEmployeeDataUtils.getAddEmployeeList());
+                return true;
+            case R.id.remove_old_list:
+                mRecyclerViewAdapter.removeItems(DummyEmployeeDataUtils.getRemoveEmployeeList());
+                return true;
+            case R.id.edit:
+                mRecyclerViewAdapter.updateItem(new Employee(1, "Nam", "Senior developer"));
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

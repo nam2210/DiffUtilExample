@@ -2,6 +2,7 @@ package com.sample.diffutil;
 
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 public class EmployeeRecyclerViewAdapter extends
                                          RecyclerView.Adapter<EmployeeRecyclerViewAdapter
@@ -32,7 +34,10 @@ public class EmployeeRecyclerViewAdapter extends
         final Employee employee = mEmployees.get(position);
         holder.name.setText(employee.getName());
         holder.role.setText(employee.getRole());
+
     }
+
+
 
     public void updateEmployeeListItems(List<Employee> employees) {
         final EmployeeDiffCallback diffCallback = new EmployeeDiffCallback(this.mEmployees, employees);
@@ -48,7 +53,52 @@ public class EmployeeRecyclerViewAdapter extends
         return mEmployees.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void addNewItems(List<Employee> addEmployeeList) {
+        List<Employee> news = new ArrayList<>(mEmployees);
+        news.addAll(addEmployeeList);
+
+        final EmployeeDiffCallback diffCallback = new EmployeeDiffCallback(this.mEmployees, news);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.mEmployees.clear();
+        this.mEmployees.addAll(news);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void removeItems(List<Employee> employees){
+        List<Employee> news = new ArrayList<>(mEmployees);
+        news.removeAll(employees);
+
+        final EmployeeDiffCallback diffCallback = new EmployeeDiffCallback(this.mEmployees, news);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.mEmployees.clear();
+        this.mEmployees.addAll(news);
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    public void updateItem(Employee employee){
+        List<Employee> news = new ArrayList<>(mEmployees);
+        int index = news.indexOf(employee);
+        news.set(index, employee);
+
+        final EmployeeDiffCallback diffCallback = new EmployeeDiffCallback(this.mEmployees, news);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.mEmployees.clear();
+        this.mEmployees.addAll(news);
+        diffResult.dispatchUpdatesTo(this);
+
+    }
+
+    //add
+    //remove
+    //update
+    //click
+
+    private static final String TAG = EmployeeRecyclerViewAdapter.class.getSimpleName();
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView role;
         private final TextView name;
@@ -57,6 +107,15 @@ public class EmployeeRecyclerViewAdapter extends
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.employee_name);
             role = (TextView) itemView.findViewById(R.id.employee_role);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Log.e(TAG,"position=" + mEmployees.get(position).name);
+                }
+            });
         }
+
+
     }
 }
