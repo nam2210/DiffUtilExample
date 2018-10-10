@@ -43,6 +43,7 @@ public class EmployeeDiffCallback extends DiffUtil.Callback {
     @Override
     public Object getChangePayload(int oldItemPosition, int newItemPosition) {
         // Implement method if you're going to use ItemAnimator
+        //todo sử dụng update những thông số cần thay đổi
         return super.getChangePayload(oldItemPosition, newItemPosition);
     }
 }
